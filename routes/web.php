@@ -28,3 +28,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post("/logout", [LoginController::class, 'logout']);
 
 });
+
+Route::middleware(['auth'])->group(function () {
+    Route::post("/admin/messages/multiple-delete", [ContactController::class, 'deleteMultipleMessages'])->name('multiple-delete');
+});
+
+
