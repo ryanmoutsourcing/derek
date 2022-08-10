@@ -3,11 +3,13 @@
 <head>
 <title>Contact Form</title>
     <link rel="stylesheet" href="/css/bootstrap.min.css">
+    {!! RecaptchaV3::initJs() !!}
 </head>
 
 <body>
 <div class="container mt-5">
 <form method="post" action="/send-message">
+    {!! RecaptchaV3::field('contact') !!}
     @csrf
 
     @if (session('status'))

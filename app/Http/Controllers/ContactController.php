@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Lunaweb\RecaptchaV3\Facades\RecaptchaV3;
 use Illuminate\Http\Request;
 use App\Models\Contact;
 
@@ -13,12 +14,14 @@ class ContactController extends Controller
     }
 
     public function store(Request $request) {
+        dd(RecaptchaV3::verify($request->get('g-recaptcha-response'), 'contact'));
         
         $this->validate($request, [
             'name' => 'required',
             'email' => 'required',
             'message' => 'required',
-            'subject' => 'required' 
+            'subject' => 'required',
+            'g-recaptcha-response' => 'required|recaptchav3:contact,0.5' 
         ]);
 
         $requestData = $request->all();
